@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pptx
+*.png
+*.jpg
+*.svg
+*.skill
+dist/
+node_modules/
+.venv/
