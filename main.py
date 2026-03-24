@@ -371,10 +371,19 @@ def cmd_list_slide_types(args):
         "data_table": "Styled data table with alternating rows",
         "metrics": "Big number KPI cards (3-4 metrics)",
         "image_grid": "Gallery grid of art styles",
+        "cn_title": "🇨🇳 Chinese education title — large characters + decorative art",
+        "cn_task_separator": "🇨🇳 Full-page task/section separator with decorative strips",
+        "cn_content": "🇨🇳 Rich content with vertical side label + framed area",
+        "cn_scenario": "🇨🇳 Scenario slide with thought bubble + analysis layout",
+        "cn_mind_map": "🇨🇳 Mind map with root node + children + sub-items",
+        "cn_evaluation": "🇨🇳 Styled evaluation/rubric table with alternating rows",
+        "cn_flowchart": "🇨🇳 Process flow with numbered step boxes + arrows",
+        "cn_reading": "🇨🇳 Reading passage with analysis sidebar",
+        "cn_brackets": "🇨🇳 Bracket analysis — curly brackets with labeled groups",
     }
     for name in sorted(SLIDE_BUILDERS.keys()):
         desc = descriptions.get(name, "")
-        print(f"  • {name:15s}  {desc}")
+        print(f"  • {name:25s}  {desc}")
     print()
 
 

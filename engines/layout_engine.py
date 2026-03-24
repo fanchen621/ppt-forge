@@ -1,7 +1,7 @@
 """
-PPT Forge v2 — Smart Layout Engine (Enhanced)
-Automatic spacing, visual hierarchy, responsive proportioning.
+PPT Forge v2 — Enhanced Smart Layout Engine
 Golden ratio grid system, modular type scale, adaptive compositions.
+Supports Chinese typography, educational layouts, and rich visual hierarchies.
 """
 
 from typing import List, Tuple, Dict, Optional
@@ -23,7 +23,7 @@ SPACING = {
     "4xl": Inches(2.4),     # ~240px massive
 }
 
-# Modular type scale (major third 1.25 ratio)
+# Modular type scale (major third 1.25 ratio) — ENHANCED for Chinese
 TYPE_SCALE = {
     "xs":    10,
     "sm":    12,
@@ -36,6 +36,16 @@ TYPE_SCALE = {
     "4xl":   55,
     "5xl":   69,
     "hero":  86,
+    # Chinese education scale (much larger)
+    "cn_title":    48,     # Section titles
+    "cn_heading":  36,     # Content headings
+    "cn_body":     24,     # Body text (larger for classroom PPTs)
+    "cn_subtitle": 28,     # Subtitles
+    "cn_huge":     72,     # Task separators
+    "cn_massive":  120,    # Hero Chinese titles
+    "cn_giant":    166,    # Maximum impact titles
+    "cn_label":    20,     # Labels and annotations
+    "cn_caption":  16,     # Small captions
 }
 
 # Line height ratios per size category
@@ -131,6 +141,110 @@ class SmartLayout:
             "divider":  (Inches(0.8), Inches(4.0), Inches(4)),
             "size_title":    Pt(TYPE_SCALE["hero"]),
             "size_subtitle": Pt(TYPE_SCALE["xl"]),
+        }
+
+    # ─── Chinese Education Layouts ────────────────────────────────────
+
+    def cn_title_slide(self) -> Dict:
+        """Chinese educational title — large characters with decorative elements."""
+        return {
+            "title_area":   (Inches(2), Inches(1.5), Inches(9.3), Inches(3)),
+            "subtitle":     (Inches(3), Inches(4.8), Inches(7.3), Inches(1)),
+            "size_title":   Pt(TYPE_SCALE["cn_massive"]),
+            "size_subtitle": Pt(TYPE_SCALE["cn_subtitle"]),
+            "decoration_tl": (Inches(0.3), Inches(0.3), Inches(2.5), Inches(1.5)),
+            "decoration_br": (Inches(10), Inches(5.5), Inches(3), Inches(1.8)),
+        }
+
+    def cn_task_separator(self) -> Dict:
+        """Full-page task/section separator — Chinese education style."""
+        return {
+            "text_area":    (Inches(2), Inches(2), Inches(9.3), Inches(3.5)),
+            "size_text":    Pt(TYPE_SCALE["cn_huge"]),
+            "decoration_top": (Inches(1.5), Inches(0.5), Inches(10.3), Inches(1.5)),
+            "decoration_bot": (Inches(1.5), Inches(5.5), Inches(10.3), Inches(1.5)),
+        }
+
+    def cn_content_with_side(self) -> Dict:
+        """Chinese educational content with vertical side label."""
+        return {
+            "side_label":   (Inches(0.3), Inches(1), Inches(1.2), Inches(5.5)),
+            "content_area": (Inches(1.8), Inches(0.8), Inches(7.5), Inches(6)),
+            "decoration":   (Inches(9.5), Inches(4.5), Inches(3.5), Inches(2.8)),
+            "heading":      (Inches(2), Inches(1), Inches(7), Inches(0.8)),
+            "body":         (Inches(2), Inches(2), Inches(7), Inches(4.5)),
+            "size_side":    Pt(TYPE_SCALE["cn_title"]),
+            "size_heading": Pt(TYPE_SCALE["cn_heading"]),
+            "size_body":    Pt(TYPE_SCALE["cn_body"]),
+        }
+
+    def cn_scenario(self) -> Dict:
+        """Chinese education scenario layout — situation + thought bubble."""
+        return {
+            "scenario_label": (Inches(0.2), Inches(0), Inches(2.5), Inches(1.2)),
+            "scenario_title": (Inches(0.4), Inches(0.2), Inches(2), Inches(0.7)),
+            "thought_bubble": (Inches(0.2), Inches(4.5), Inches(4.3), Inches(2.5)),
+            "content_box":    (Inches(4.8), Inches(0.8), Inches(8.3), Inches(6.2)),
+            "content_text":   (Inches(5.2), Inches(1.8), Inches(7.5), Inches(2.5)),
+            "content_image":  (Inches(6), Inches(3.5), Inches(5.5), Inches(3.5)),
+            "size_label":   Pt(TYPE_SCALE["cn_heading"]),
+            "size_content": Pt(TYPE_SCALE["cn_body"]),
+            "size_bubble":  Pt(TYPE_SCALE["cn_label"]),
+        }
+
+    def cn_mind_map(self) -> Dict:
+        """Mind map layout for knowledge organization."""
+        return {
+            "heading":     (Inches(0.8), Inches(0.3), Inches(11), Inches(0.7)),
+            "map_area":    (Inches(1), Inches(1.2), Inches(11.3), Inches(6)),
+            "center_node": (Inches(5.5), Inches(3.8)),
+            "decoration":  (Inches(10), Inches(5.5), Inches(3), Inches(1.8)),
+            "size_heading": Pt(TYPE_SCALE["cn_heading"]),
+        }
+
+    def cn_evaluation_table(self) -> Dict:
+        """Evaluation/rubric table layout."""
+        return {
+            "heading":  (Inches(1.5), Inches(0.5), Inches(10), Inches(0.8)),
+            "table":    (Inches(0.8), Inches(1.5), Inches(11.5), Inches(5)),
+            "decoration": (Inches(0.2), Inches(4.5), Inches(1), Inches(2.5)),
+            "size_heading": Pt(TYPE_SCALE["cn_heading"]),
+            "size_header":  Pt(TYPE_SCALE["cn_label"]),
+            "size_cell":    Pt(TYPE_SCALE["cn_caption"]),
+        }
+
+    def cn_flowchart(self) -> Dict:
+        """Process flow / writing guide layout."""
+        return {
+            "heading":    (Inches(0.8), Inches(0.3), Inches(11), Inches(0.7)),
+            "flow_area":  (Inches(0.5), Inches(1.2), Inches(12.3), Inches(5.8)),
+            "decoration": (Inches(9.8), Inches(5), Inches(3.2), Inches(2.2)),
+            "size_heading": Pt(TYPE_SCALE["cn_heading"]),
+        }
+
+    def cn_split_content(self) -> Dict:
+        """Split layout — left illustration, right content with annotations."""
+        return {
+            "left_image":   (Inches(0.3), Inches(0.5), Inches(5.5), Inches(6.5)),
+            "right_content": (Inches(6.2), Inches(0.5), Inches(6.8), Inches(6.5)),
+            "heading":      (Inches(6.5), Inches(0.8), Inches(6), Inches(0.8)),
+            "body":         (Inches(6.5), Inches(1.8), Inches(6), Inches(4)),
+            "annotation":   (Inches(6.5), Inches(5.5), Inches(6), Inches(1.2)),
+            "size_heading": Pt(TYPE_SCALE["cn_heading"]),
+            "size_body":    Pt(TYPE_SCALE["cn_body"]),
+            "size_annot":   Pt(TYPE_SCALE["cn_label"]),
+        }
+
+    def cn_reading_passage(self) -> Dict:
+        """Reading passage with analysis sidebar."""
+        return {
+            "title_bar":   (Inches(1.5), Inches(0.5), Inches(6), Inches(0.7)),
+            "passage":     (Inches(1.5), Inches(1.5), Inches(7), Inches(5.5)),
+            "sidebar":     (Inches(9), Inches(1), Inches(3.8), Inches(5.5)),
+            "decoration":  (Inches(9.2), Inches(5), Inches(3.5), Inches(2.2)),
+            "size_title":   Pt(TYPE_SCALE["cn_heading"]),
+            "size_body":    Pt(TYPE_SCALE["cn_body"]),
+            "size_sidebar": Pt(TYPE_SCALE["cn_label"]),
         }
 
     # ─── Content Slide Layouts ────────────────────────────────────────
